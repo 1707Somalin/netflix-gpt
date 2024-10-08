@@ -1,11 +1,12 @@
 
-import './App.css';
+
+import Body from "./components/Body.js";
 
 function App() {
   return (
-    <div className="text-2xl font-mono text-pink-400 p-2 ">
-      Hello Everyone
-    </div>
+   <div>
+ <Body/>
+   </div>
   );
 }
 
