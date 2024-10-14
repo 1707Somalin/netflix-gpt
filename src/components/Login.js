@@ -118,7 +118,8 @@ updateProfile(user, {
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
-    seterrorMessage( errorCode+ errorMessage)
+    // seterrorMessage( errorCode+ errorMessage)
+    seterrorMessage("Please Sign Up !")
   });
 
       }

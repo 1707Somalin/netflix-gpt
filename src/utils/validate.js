@@ -7,7 +7,7 @@ const isPaswordValid=/^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{6,})\S$/.test(p
 
 if(!isEmailValid) return "Email is not valid !";
 
-if(!isPaswordValid) return "Password is invalid";
+if(!isPaswordValid) return "Password is invalid : e.g - #Test1234 ";
 
 return null;
 
