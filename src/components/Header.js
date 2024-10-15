@@ -5,7 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { addUser, removeUser } from "../utils/userSlice";
-import { NETFLIX_LOGO } from "../utils/constants";
+import { NETFLIX_LOGO, SUPPORTED_LANGUAGES } from "../utils/constants";
+import GptSearch from "./GptSearch";
+import { toggleGptSearchView } from "../utils/gptSlice";
+import { changeLanguage } from "../utils/configSlice";
 
 const Header =()=>{
 
@@ -14,6 +17,10 @@ const Header =()=>{
     const dispatch = useDispatch();
 
     const user= useSelector((store)=>store.user);
+    const showGptSearch= useSelector((store)=>store.gpt.showGptSearch);
+   
+    
+   
     
 
 
@@ -74,6 +81,22 @@ signOut(auth)
 
     }
 
+
+    const handleGptSearch=()=>{
+
+      //toggle Gpt search using redux store
+
+      dispatch(toggleGptSearchView())
+
+
+
+    }
+
+    const handleLanguageChange=(e)=>{
+      dispatch(changeLanguage(e.target.value));
+
+    }
+
     return (
         <div className="absolute z-10 w-screen bg-gradient-to-b from-black flex justify-around items-center">
 
@@ -81,10 +104,26 @@ signOut(auth)
 
 
 {user && (<div className="flex justify-between items-center">
+
+    { showGptSearch && 
+     <select className="p-2 bg-gray-900 text-white 
+     font-bold" onChange={handleLanguageChange}>
+    {SUPPORTED_LANGUAGES.map((curELem)=>{
+      return <option key={curELem.identifier} value={curELem.identifier}>{curELem.name}</option>
+
+      })}
+     </select>
+     }
   
-  <p className="font-bold font-mono text-2xl text-white">Hello {user.displayName}{ }</p>
+ <button className="text-white bg-purple-500 rounded-lg p-2 mx-2" onClick={handleGptSearch}>
+  {
+    showGptSearch ? "Home Page" : "Gpt Search"
+  }
+ </button>
+
 <img alt="userLogo" src={user.photoURL} className="w-12 h-12 mx-2"></img>
    {/* <img alt="logo" src="https://occ-0-4995-2186.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABTZ2zlLdBVC05fsd2YQAR43J6vB1NAUBOOrxt7oaFATxMhtdzlNZ846H3D8TZzooe2-FT853YVYs8p001KVFYopWi4D4NXM.png?r=229" className="w-12 h-12"></img> */}
+
     <button className="p-2 m-2 bg-red-600 text-white rounded-lg" onClick={handleSignOut}>Sign Out</button>
 </div>)}
         </div>

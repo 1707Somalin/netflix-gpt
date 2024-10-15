@@ -10,7 +10,7 @@ const MainContainer = () => {
     if(movies===null) return ; //if nowPlayingMovies is null
 
     //now playing movies is a list of all 20 movies
-    const mainMovie = movies[0];
+    const mainMovie = movies[1];
     console.log(mainMovie)
   return (
     <div className='relative'>
